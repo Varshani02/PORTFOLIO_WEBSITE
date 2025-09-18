@@ -1,0 +1,674 @@
+/* =========================
+   THEME & TOKENS
+========================= */
+:root{
+  /* Gradient like your sample: purple → blue → cyan → pink */
+  --grad: linear-gradient(90deg, #8b5cf6 0%, #4da3ff 35%, #22d1f9 65%, #d36ad8 100%);
+
+  /* Dark (default) */
+  --bg: #000000;
+  --text: #ffffff;
+  --muted: #ffffffcc;
+
+  --surface: rgba(255,255,255,0.05);   /* subtle for cards if needed */
+  --border: rgba(255,255,255,0.16);
+  --divider: rgba(255,255,255,0.18);
+  --shadow: rgba(0,0,0,0.35);
+
+  --left-offset: clamp(96px, 16vw, 340px);
+  --max-hero: 880px;
+}
+
+:root[data-theme="light"]{
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #000000b3;
+
+  --surface: rgba(0,0,0,0.03);
+  --border: rgba(0,0,0,0.14);
+  --divider: rgba(0,0,0,0.12);
+  --shadow: rgba(0,0,0,0.15);
+}
+
+*{ box-sizing: border-box; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; }
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Utility: gradient text */
+.gradient-text{
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* =========================
+   PANELS
+========================= */
+.panel{ display: none; }
+.panel.active{ display: block; }
+
+/* =========================
+   HOME / HERO
+========================= */
+.page{
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+.hero{
+  margin-left: var(--left-offset);
+  max-width: var(--max-hero);
+}
+.name{
+  margin: 0 0 12px 0;
+  font-weight: 900;
+  letter-spacing: .4px;
+  font-size: clamp(52px, 7.2vw, 92px);
+}
+.name-link{ text-decoration: none; color: var(--text); }
+
+/* Tagline */
+.tagline{
+  margin: 0 0 22px 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: clamp(20px, 2.6vw, 30px);
+}
+.muted{ color: var(--muted); }
+
+/* Typing word = gradient (no underline) */
+.typing-wrapper{
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  min-width: 22ch;
+  white-space: nowrap;
+}
+.typing{
+  display: inline-block;
+  white-space: nowrap;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.caret{
+  width: 1ch;
+  margin-left: 2px;
+  border-right: 2px solid currentColor;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* =========================
+   NAV (short left-aligned gradient underline + gradient text on hover/active)
+========================= */
+.nav{
+  margin-top: 8px;
+  display: flex;
+  gap: clamp(16px, 3.4vw, 36px);
+  flex-wrap: wrap;
+}
+.nav a{
+  position: relative;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: clamp(18px, 2.1vw, 26px);
+  padding: 8px 2px;
+  transition: opacity .15s ease, -webkit-text-fill-color .15s ease;
+}
+.nav a::after{
+  content: "";
+  position: absolute;
+  left: 0; /* left-aligned */
+  bottom: -6px;
+  width: 42%;             /* short underline */
+  height: 2px;
+  background: var(--grad);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .18s ease-in-out;
+  pointer-events: none;
+}
+.nav a:hover,
+.nav a:focus,
+.nav a.active{
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.nav a:hover::after,
+.nav a:focus::after,
+.nav a.active::after{ transform: scaleX(1); }
+
+/* =========================
+   ICON BUTTONS (outlined only; NO glow on hover)
+========================= */
+.toolbar{
+  margin: 22px 0 0;
+  display: flex;
+  gap: 14px;
+}
+.icon-btn{
+  --size: 46px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--text);
+  position: relative;
+
+  /* outlined by gradient border-box, no inner fill change */
+  background: var(--bg);
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--bg), var(--bg)), var(--grad);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.icon-btn i{ font-size: 20px; }
+
+/* remove gradient "lighting" effect on hover */
+.icon-btn::before{ display:none; }
+.icon-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px var(--shadow); /* subtle neutral shadow */
+}
+
+/* =========================
+   TOP BARS
+========================= */
+.panel-topbar{
+  width: 100%;
+  background: var(--bg);
+  border-bottom: 1px solid var(--divider);
+}
+.topbar-inner{
+  margin-left: var(--left-offset);
+  max-width: min(1200px, calc(100% - var(--left-offset) - 24px));
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand{
+  font-weight: 900;
+  letter-spacing: .5px;
+  font-size: clamp(24px, 3vw, 36px);
+  text-decoration: none;
+  color: var(--text);
+}
+
+/* Theme toggle button (your JS toggles data-theme) */
+.theme-toggle{
+  position: fixed;
+  right: 16px;
+  top: 14px;
+  z-index: 2000;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--bg), var(--bg)), var(--grad);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 20px var(--shadow);
+  cursor: pointer;
+}
+
+/* =========================
+   GENERIC SECTIONS
+========================= */
+.section{
+  padding: 28px 0 24px;
+  margin-left: var(--left-offset);
+  max-width: min(1200px, calc(100% - var(--left-offset) - 24px));
+}
+.section-head{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 18px 0;
+}
+.section-title{
+  margin: 0;
+  letter-spacing: 2px;
+  font-weight: 900;
+  font-size: 14px;
+}
+.section-rule{
+  flex: 0 0 220px;
+  height: 2px;
+  background: var(--divider);
+  border-radius: 1px;
+}
+
+/* EXTRA spacing for Experience subsections (Part-time, Voluntary & Leadership) */
+#experience .section > .section-head:nth-of-type(n+2){
+  margin-top: clamp(36px, 4.5vw, 56px) !important; /* more space above */
+  margin-bottom: 16px !important;                  /* and a bit below */
+}
+
+/* =========================
+   ABOUT LAYOUT
+========================= */
+.about-grid{
+  display: grid;
+  grid-template-columns: 320px 1fr; /* photo | content */
+  gap: 28px 36px;
+  align-items: start;
+}
+.about-photo img{
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px var(--shadow);
+  border: 1px solid var(--border);
+  object-fit: cover;
+}
+.about-blurb{
+  margin: 0 0 16px 0;
+  line-height: 1.6;
+  font-size: clamp(15px, 1.4vw, 18px);
+}
+.about-blurb strong{ font-weight: 800; }
+.triad{
+  display: inline-block;
+  margin-left: 6px;
+  font-style: normal;
+  font-weight: 700;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* key/value list with tiny gradient bullets */
+.kv-list{ list-style: none; margin: 0 0 10px 0; padding: 0; }
+.kv-list li{
+  position: relative;
+  padding-left: 18px;
+  margin: 10px 0;
+  font-size: clamp(14px, 1.3vw, 17px);
+}
+.kv-list li::before{
+  content: "";
+  width: 6px; height: 6px;
+  background: var(--grad);
+  border-radius: 50%;
+  position: absolute;
+  left: 0; top: 10px;
+}
+.kv-list .k{ font-weight: 800; }
+.kv-list .v{ opacity: .9; }
+
+/* email / city row */
+.meta-row{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 10px 26px;
+  margin-top: 12px;
+}
+.meta{ display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.meta i{ background: var(--grad); -webkit-background-clip: text; color: transparent; }
+
+/* email link: gradient on hover + short underline */
+.link{
+  color: var(--text);
+  text-decoration: none;
+  position: relative;
+}
+.link::after{
+  content:"";
+  position:absolute; left:0; bottom:-3px;
+  width: 60%; height: 2px;
+  background: var(--grad);
+  transform: scaleX(0);
+  transform-origin:left;
+  transition: transform .15s ease;
+  pointer-events:none;
+}
+.link:hover{
+  background: var(--grad);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.link:hover::after{ transform: scaleX(1); }
+
+/* =========================
+   INTERESTS GRID (outlined only; NO glow on hover)
+========================= */
+.interests-head{ margin-top: 24px; }
+.interests-grid{
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 18px 24px;
+}
+.interest-card{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 18px;
+  border-radius: 12px;
+  color: var(--text);
+
+  background: var(--bg);                 /* no fill */
+  border: 1.5px solid transparent;
+  background-image: linear-gradient(var(--bg), var(--bg)), var(--grad);
+  background-clip: padding-box, border-box;
+  background-origin: border-box;
+
+  position: relative;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+/* remove hover glow */
+.interest-card::before{ display:none; }
+.interest-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px var(--shadow);
+}
+
+/* =========================
+   PROJECTS / EXPERIENCE (outlined only; NO glow)
+========================= */
+.projects-grid{
+  display: grid;
+  grid-template-columns: 1fr;  /* one full-width per row */
+  gap: 18px;
+}
+.project-card{
+  text-align: left;
+  width: 100%;
+  padding: 20px 22px;
+  border-radius: 16px;
+  color: var(--text);
+  cursor: pointer;
+  position: relative;
+
+  background: var(--bg);                 /* no fill */
+  border: 1.5px solid transparent;
+  background-image: linear-gradient(var(--bg), var(--bg)), var(--grad);
+  background-clip: padding-box, border-box;
+
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+/* remove hover glow */
+.project-card::before{ display:none; }
+.project-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px var(--shadow);
+}
+
+.pc-title{ font-weight: 800; font-size: clamp(18px, 2vw, 22px); margin-bottom: 6px; }
+.pc-label{ font-weight: 800; }
+.pc-skills{ opacity: .95; }
+.xp-meta{ opacity: .9; margin: 2px 0 6px; }
+
+/* =========================
+   MODAL (scrollable)
+========================= */
+.project-modal[aria-hidden="true"]{ display: none; }
+.project-modal{
+  position: fixed; inset: 0; z-index: 1500;
+}
+.project-modal__backdrop{
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.55);
+  pointer-events:auto;
+}
+:root[data-theme="light"] .project-modal__backdrop{ background: rgba(0,0,0,0.35); }
+
+.project-modal__dialog{
+  position: relative;
+  width: min(920px, 92vw);
+  max-height: 86svh;
+  margin: 6vh auto 0;
+  border-radius: 18px;
+  border: 1.5px solid transparent;
+
+  background-image: linear-gradient(var(--bg), var(--bg)), var(--grad);
+  background-clip: padding-box, border-box;
+
+  box-shadow: 0 20px 48px var(--shadow);
+  overflow: hidden;
+}
+.project-modal__close{
+  position: absolute; right: 12px; top: 10px;
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--bg), var(--bg)), var(--grad);
+  background-clip: padding-box, border-box;
+  color: var(--text);
+  font-size: 22px;
+  cursor: pointer;
+}
+.project-modal__content{
+  padding: 22px 24px;
+  overflow: auto;
+  max-height: 86svh;
+  background: var(--bg);
+  color: var(--text);
+}
+.story-title{ margin: 0 0 6px 0; font-size: 24px; font-weight: 900; }
+.story p{ line-height: 1.6; margin: 10px 0; }
+.story h4{ margin: 18px 0 8px; font-size: 16px; font-weight: 900; }
+
+/* Skills bullets in modal: small gradient dots */
+.skills-bullets{ padding-left: 20px; margin: 0; }
+.skills-bullets li{ margin: 6px 0; font-weight: 700; position: relative; }
+.skills-bullets li::marker{ color: transparent; }
+.skills-bullets li::before{
+  content: "";
+  width: 8px; height: 8px;
+  background: var(--grad);
+  border-radius: 50%;
+  position: absolute;
+  left: -18px; top: 8px;
+}
+
+/* =========================
+   CLICK SAFETY (decorative layers never block)
+========================= */
+.nav a::after,
+.icon-btn::before,
+.interest-card::before,
+.project-card::before { pointer-events: none; }
+
+.panel-topbar, .topbar-inner, .nav { position: relative; z-index: 10; }
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1050px){
+  .about-grid{ grid-template-columns: 260px 1fr; }
+}
+@media (max-width: 820px){
+  .hero{ margin-left: clamp(24px, 8vw, 60px); }
+  .topbar-inner, .section{
+    margin-left: clamp(24px, 8vw, 60px);
+    max-width: calc(100% - clamp(24px, 8vw, 60px) - 16px);
+  }
+  .about-grid{ grid-template-columns: 1fr; }
+  .about-photo{ order: -1; max-width: 420px; }
+}
+@media (max-width: 420px){
+  .name{ font-size: clamp(40px, 12vw, 72px); }
+  .nav a{ font-size: 16px; }
+  .project-modal__dialog{ width: 92vw; max-height: 88svh; }
+}
+
+
+/* =========================
+ PROJECTS PANEL GUTTERS (match Experience)
+ Strong overrides in case earlier rules are winning.
+========================= */
+#projects > .panel-topbar .topbar-inner,
+#projects > .section{
+margin-left: var(--left-offset) !important;
+max-width: min(1200px, calc(100% - var(--left-offset) - 24px)) !important;
+padding-right: 8px !important; /* tiny breathing room on the right */
+}
+
+/* Extra spacing before sub-headings in Projects */
+#projects .section > .section-head:nth-of-type(n+2){
+margin-top: clamp(36px, 4.5vw, 56px) !important;
+margin-bottom: 16px !important;
+}
+
+/* Keep gutters on small screens for Projects too */
+@media (max-width: 820px){
+#projects > .panel-topbar .topbar-inner,
+#projects > .section{
+  margin-left: clamp(24px, 8vw, 60px) !important;
+  max-width: calc(100% - clamp(24px, 8vw, 60px) - 16px) !important;
+}
+}
+
+/* =========================
+ EXPERIENCE PANEL GUTTERS (match Projects)
+========================= */
+#experience > .panel-topbar .topbar-inner,
+#experience > .section{
+margin-left: var(--left-offset) !important;
+max-width: min(1200px, calc(100% - var(--left-offset) - 24px)) !important;
+padding-right: 8px !important;
+}
+
+/* Keep gutters on small screens for Experience too */
+@media (max-width: 820px){
+#experience > .panel-topbar .topbar-inner,
+#experience > .section{
+  margin-left: clamp(24px, 8vw, 60px) !important;
+  max-width: calc(100% - clamp(24px, 8vw, 60px) - 16px) !important;
+}
+}
+/* =========================
+ CONTACT GRID (matches your gradient-outline aesthetic)
+========================= */
+.contact-grid{
+margin-top: 16px;
+display: grid;
+grid-template-columns: 1.1fr 1fr; /* left stack + right tall card */
+gap: 18px;
+}
+.contact-card{
+padding: 20px 22px;
+border-radius: 16px;
+color: var(--text);
+background: var(--bg);
+border: 1.5px solid transparent;
+background-image: linear-gradient(var(--bg), var(--bg)), var(--grad);
+background-clip: padding-box, border-box;
+transition: transform .15s ease, box-shadow .2s ease;
+}
+.contact-card:hover{ transform: translateY(-2px); box-shadow: 0 12px 26px var(--shadow); }
+.contact-social{ grid-row: span 2; } /* right card spans both rows */
+
+.contact-row{ display: flex; gap: 14px; align-items: center; }
+.contact-icon{
+width: 54px; height: 54px; border-radius: 50%;
+display: grid; place-items: center;
+background: var(--surface);
+border: 1.5px solid var(--border);
+font-size: 20px;
+}
+.contact-title{ font-weight: 900; font-size: clamp(18px, 1.8vw, 22px); }
+.contact-text{ opacity: .95; }
+
+.contact-soc-list{ display: flex; gap: 12px; margin-top: 12px; }
+.contact-soc{
+width: 46px; height: 46px; border-radius: 50%;
+display: grid; place-items: center; color: var(--text); text-decoration: none;
+background: var(--bg);
+border: 1.5px solid transparent;
+background-image: linear-gradient(var(--bg), var(--bg)), var(--grad);
+background-clip: padding-box, border-box;
+transition: transform .15s ease, box-shadow .2s ease;
+}
+.contact-soc:hover{ transform: translateY(-2px); box-shadow: 0 10px 22px var(--shadow); }
+
+/* responsive: single column on small screens */
+@media (max-width: 900px){
+.contact-grid{ grid-template-columns: 1fr; }
+.contact-social{ grid-row: auto; }
+}
+/* === CONTACT tweaks === */
+
+/* 1) Solid black titles (override gradient) for LIGHT MODE */
+.contact-title{
+background: none !important;
+-webkit-background-clip: initial !important;
+background-clip: initial !important;
+-webkit-text-fill-color: initial !important;
+color: #111 !important; /* black */
+}
+
+/* Make the small line/body text and links black inside contact cards (light mode) */
+.contact-card .contact-text,
+.contact-card .link{
+color: #111 !important;
+}
+.contact-card .link:hover{
+background: none !important;
+-webkit-background-clip: initial !important;
+-webkit-text-fill-color: initial !important;
+color: #111 !important;
+}
+
+/* 2) Gradient ring around the leading icon (same as card outline) */
+.contact-icon{
+border: 2px solid transparent !important;
+background-image: linear-gradient(var(--bg), var(--bg)), var(--grad) !important;
+background-origin: border-box !important;
+background-clip: padding-box, border-box !important;
+background-color: var(--bg) !important; /* clean inner fill */
+}
+
+/* Make the glyph inside that circle black for LIGHT MODE */
+.contact-icon i{
+color: #111 !important;
+}
+
+/* === CONTACT theme overrides (dark mode) === */
+:root[data-theme="dark"] .contact-card .contact-title,
+:root[data-theme="dark"] .contact-card .contact-text,
+:root[data-theme="dark"] .contact-card .link,
+:root[data-theme="dark"] .contact-icon i{
+color: #fff !important;
+}
+:root[data-theme="dark"] .contact-card .link:hover{
+color: #fff !important;
+background: none !important;
+-webkit-background-clip: initial !important;
+-webkit-text-fill-color: initial !important;
+}
+/* keep the gradient ring in both themes */
+:root[data-theme="dark"] .contact-icon,
+:root[data-theme="light"] .contact-icon{
+border: 2px solid transparent !important;
+background-image: linear-gradient(var(--bg), var(--bg)), var(--grad) !important;
+background-origin: border-box !important;
+background-clip: padding-box, border-box !important;
+background-color: var(--bg) !important;
+}
