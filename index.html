@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Varshani | Portfolio</title>
 
-  <!-- SEO & social preview (optional but recommended) -->
+  <!-- SEO -->
   <meta name="description" content="Varshani — Data Science portfolio (projects, research, experience).">
   <link rel="canonical" href="https://varshani02.github.io/PORTFOLIOWEBSITE/">
   <meta property="og:title" content="Varshani | Portfolio">
@@ -20,15 +20,15 @@
   <meta name="twitter:description" content="Data scientist • projects • experience">
   <meta name="twitter:image" content="https://varshani02.github.io/PORTFOLIOWEBSITE/static/letter-v.png">
   <meta name="theme-color" content="#000000">
-  <link rel="icon" href="./static/letter-v.png"> <!-- replace with real favicon when you have it -->
+  <link rel="icon" href="./static/letter-v.png">
 
-  <!-- Inter font -->
+  <!-- Inter font + icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <link rel="stylesheet" href="./static/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
@@ -37,12 +37,34 @@
     <i class="fa-solid fa-moon"></i>
   </button>
 
+  <!-- ===== MOBILE HEADER (phones only) ===== -->
+  <header class="m-header" aria-label="Mobile navigation">
+    <a class="brand" data-target="home" href="#home">Varshani</a>
+
+    <!-- hidden checkbox controls the drawer -->
+    <input type="checkbox" id="mnav" class="mnav-checkbox" aria-hidden="true" />
+    <label for="mnav" class="hamburger" aria-label="Open menu" aria-controls="mnavDrawer" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav id="mnavDrawer" class="mnav-drawer" role="menu">
+      <ul>
+        <li><a data-target="home" href="#home" role="menuitem">Home</a></li>
+        <li><a data-target="about" href="#about" role="menuitem">About</a></li>
+        <li><a data-target="projects" href="#projects" role="menuitem">Projects</a></li>
+        <li><a data-target="experience" href="#experience" role="menuitem">Experience</a></li>
+        <li><a data-target="contact" href="#contact" role="menuitem">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- /MOBILE HEADER -->
+
   <!-- ===== HOME ===== -->
   <section id="home" class="panel active">
     <main class="page">
       <header class="hero">
         <h1 class="name">
-            <a class="name-link" data-target="home" href="#home">Varshani</a>
+          <a class="name-link" data-target="home" href="#home">Varshani</a>
         </h1>
 
         <h2 class="tagline">
@@ -65,11 +87,9 @@
           <a class="icon-btn" href="https://www.linkedin.com/in/varshani02sharma/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
           <a class="icon-btn" href="https://github.com/Varshani02" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
           <a class="icon-btn" href="mailto:varshani02sharma@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-          <a class="icon-btn" href="static/resume.pdf"target="_blank"><i class="fa-solid fa-file-arrow-down"></i></a>
+          <a class="icon-btn" href="static/resume.pdf" target="_blank" aria-label="Resume"><i class="fa-solid fa-file-arrow-down"></i></a>
         </div>
-          </p>
-          
-      </header>     
+      </header>
     </main>
   </section>
 
@@ -161,13 +181,10 @@
     </div>
 
     <div class="section">
-      <!-- Main page title -->
       <div class="section-head">
         <h3 class="section-title">SELF PROJECTS</h3>
         <span class="section-rule"></span>
       </div>
-
-      <!-- Sub-section: Projects -->
 
       <div class="projects-grid">
         <button class="project-card" data-template="tpl-p8">
@@ -186,7 +203,6 @@
         </button>
       </div>
 
-      <!-- Sub-section: Research & Industry Collaboration -->
       <div class="section-head" style="margin-top:24px">
         <h3 class="section-title">RESEARCH &amp; INDUSTRY COLLABORATION</h3>
         <span class="section-rule"></span>
@@ -203,24 +219,23 @@
         </button>
       </div>
 
-      <!-- Sub-section: Academic Projects -->
       <div class="section-head" style="margin-top:24px">
         <h3 class="section-title">ACADEMIC PROJECTS</h3>
         <span class="section-rule"></span>
       </div>
       <div class="projects-grid">
         <button class="project-card" data-template="tpl-p5">
-          <div class="pc-title">Exploring Socio-Economic Trends in England & Wales (2011–2021) (Academic Project)</div>
+          <div class="pc-title">Exploring Socio-Economic Trends in England &amp; Wales (2011–2021)</div>
           <div class="pc-skills"><span class="pc-label">Skills -</span> Data Visualization, Tableau, Cleaning & Harmonization, Bayesian Methods, PCA/t-SNE, Bayesian GMM, Python</div>
         </button>
 
         <button class="project-card" data-template="tpl-p1">
-          <div class="pc-title">Clustering Words in Literature with Graph Algorithms (Academic Project)</div>
+          <div class="pc-title">Clustering Words in Literature with Graph Algorithms</div>
           <div class="pc-skills"><span class="pc-label">Skills -</span> NLP, Text Preprocessing, Hierarchical Clustering, Graph Algorithms (Dijkstra), Python, Data Visualization</div>
         </button>
 
         <button class="project-card" data-template="tpl-p3">
-          <div class="pc-title">Climate Sentiment & Topic Modelling in Corporate Disclosures (Academic Project)</div>
+          <div class="pc-title">Climate Sentiment & Topic Modelling in Corporate Disclosures</div>
           <div class="pc-skills"><span class="pc-label">Skills -</span> Text Classification (Naive Bayes, Neural Networks, BERT), Topic Modelling (LDA), Transfer Learning, Hyperparameter Tuning, Python</div>
         </button>
       </div>
@@ -249,7 +264,6 @@
       </div>
 
       <div class="projects-grid">
-        <!-- Latest first -->
         <button class="project-card" data-template="tpl-x1">
           <div class="pc-title">Software Engineer (Internship)</div>
           <div class="xp-meta">Astrojen Health Care Pvt. Ltd. · Feb 2024 – Apr 2024 · Remote, India</div>
@@ -275,7 +289,6 @@
         </button>
       </div>
 
-      <!-- ===== PART-TIME ===== -->
       <div class="section-head" style="margin-top:24px">
         <h3 class="section-title">PART-TIME</h3>
         <span class="section-rule"></span>
@@ -289,7 +302,6 @@
         </button>
       </div>
 
-      <!-- ===== VOLUNTARY & LEADERSHIP ===== -->
       <div class="section-head" style="margin-top:24px">
         <h3 class="section-title">VOLUNTARY &amp; LEADERSHIP</h3>
         <span class="section-rule"></span>
@@ -326,7 +338,6 @@
           <div class="pc-skills"><span class="pc-label">Skills -</span> Design Analytics · Awareness Campaigns · Cybersecurity Engagement</div>
         </button>
       </div>
-
     </div>
   </section>
 
@@ -344,17 +355,14 @@
         </nav>
       </div>
     </div>
+
     <div class="section">
       <div class="section-head">
         <h3 class="section-title">CONTACT</h3>
         <span class="section-rule"></span>
       </div>
 
-      <!-- keep your original helper text -->
-
-      <!-- NEW: contact grid using your gradient-outline cards -->
       <div class="contact-grid">
-        <!-- Address -->
         <div class="contact-card">
           <div class="contact-row">
             <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
@@ -365,7 +373,6 @@
           </div>
         </div>
 
-        <!-- Email -->
         <div class="contact-card">
           <div class="contact-row">
             <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
@@ -378,7 +385,6 @@
           </div>
         </div>
 
-        <!-- Social profiles (spans 2 rows on wide screens) -->
         <div class="contact-card contact-social">
           <div class="contact-row">
             <div class="contact-icon"><i class="fa-solid fa-share-nodes"></i></div>
@@ -392,12 +398,11 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- /contact-grid -->
+      </div><!-- /contact-grid -->
     </div>
   </section>
 
-  <!-- ===== PROJECT DETAIL TEMPLATES ===== -->
+   <!-- ===== PROJECT DETAIL TEMPLATES ===== -->
   <!-- (All content exactly as you provided) -->
 
   <!-- p1 -->
@@ -743,7 +748,7 @@
     <div class="story">
       <h3 class="story-title">Software Engineer (Internship)</h3>
       <p>Astrojen Health Care Pvt. Ltd. · Feb 2024 – Apr 2024 · Remote, India</p>
-      <p>Skills: React.js · Node.js · MongoDB · AWS Lambda · SQL · Automation</p>
+      <p><strong>Skills:</strong> React.js · Node.js · MongoDB · AWS Lambda · SQL · Automation</p>
       <ul class="skills-bullets">
         <li>Contributed to the development of a centralized CRM system to manage client interactions, patient data, and business workflows.</li>
         <li>Improved data accessibility, enabling teams to retrieve client records 50% faster, which directly reduced delays in handling customer queries.</li>
@@ -763,7 +768,7 @@
     <div class="story">
       <h3 class="story-title">Full-stack Developer (Internship)</h3>
       <p>Business Web Solutions (BWS) · May 2023 – Jul 2023 · Remote, India</p>
-      <p>Skills: MERN Stack (MongoDB, Express.js, React.js, Node.js) · REST APIs · Query Optimization · UI/UX</p>
+      <p><strong>Skills:</strong> MERN Stack (MongoDB, Express.js, React.js, Node.js) · REST APIs · Query Optimization · UI/UX</p>
       <ul class="skills-bullets">
         <li>Developed an e-commerce fashion app supporting 500+ product listings, giving businesses a scalable digital platform.</li>
         <li>Integrated 3 APIs (inventory, payments, order processing), reducing update delays by 85% and ensuring real-time data sync.</li>
@@ -780,7 +785,7 @@
     <div class="story">
       <h3 class="story-title">Cyber Security Intern</h3>
       <p>Gurugram Police Cyber Security Summer Internship (GPCSSI) · Jun 2021 – Jul 2021 · India</p>
-      <p>Skills: Red Hat Linux · Networking · Cybersecurity · Cyber Law · Digital Forensics</p>
+      <p><strong>Skills:</strong> Red Hat Linux · Networking · Cybersecurity · Cyber Law · Digital Forensics</p>
       <ul class="skills-bullets">
         <li>Trained in Linux-based networking and system monitoring, strengthening fundamentals in log analysis and system security.</li>
         <li>Learned to identify and respond to cyber-attacks including SQL injection, DoS, phishing, brute-force password attacks, and email spoofing.</li>
@@ -797,7 +802,7 @@
     <div class="story">
       <h3 class="story-title">Trainee (Apprenticeship)</h3>
       <p>Netcamp Solutions Pvt. Ltd. · May 2021 – Jul 2021 · Remote, India</p>
-      <p>Skills: Networking · Core Java · Android Studio · HTML · CSS · JavaScript · SQL · SEO</p>
+      <p><strong>Skills:</strong> Networking · Core Java · Android Studio · HTML · CSS · JavaScript · SQL · SEO</p>
       <ul class="skills-bullets">
         <li>Built a functional website using HTML, CSS, and JavaScript, which included multiple pages, responsive layouts, and interactive UI components.</li>
         <li>Learned to apply JavaScript for dynamic elements, such as form validations and interactive navigation, improving usability compared to static sites.</li>
@@ -817,7 +822,7 @@
     <div class="story">
       <h3 class="story-title">Online Assistant (Part-time)</h3>
       <p>Sainsbury’s · Nov 2024 – Present · Bristol, UK</p>
-      <p>Skills: Data Accuracy · Inventory Management Systems · Process Optimization · Time Management · Customer Experience</p>
+      <p><strong>Skills:</strong> Data Accuracy · Inventory Management Systems · Process Optimization · Time Management · Customer Experience</p>
       <ul class="skills-bullets">
         <li>Processed and fulfilled 200+ online orders weekly using digital inventory systems, maintaining 99% order accuracy through systematic item tracking and substitution analysis.</li>
         <li>Leveraged handheld data collection devices to update stock records in real time, improving product availability insights and reducing substitution errors by ~12%.</li>
@@ -834,7 +839,7 @@
     <div class="story">
       <h3 class="story-title">Secretary</h3>
       <p>IEEE BITD Student Branch · Aug 2021 – Dec 2023 · Ranchi, India</p>
-      <p>Skills: Leadership · Data-driven Event Planning · Strategic Communication · Stakeholder Management</p>
+      <p><strong>Skills:</strong> Leadership · Data-driven Event Planning · Strategic Communication · Stakeholder Management</p>
       <ul class="skills-bullets">
         <li>Coordinated 10+ technical workshops and seminars, engaging 300+ students, and tracked participation data to optimize future events.</li>
         <li>Implemented structured workflows, reducing organizational overhead by 25% through data-backed task delegation and progress tracking.</li>
@@ -848,7 +853,7 @@
     <div class="story">
       <h3 class="story-title">Graphics Lead</h3>
       <p>Google Developer Student Club (GDSC), BITD · Aug 2021 – Jul 2023 · Ranchi, India</p>
-      <p>Skills: Creative Analytics · Design Strategy · Engagement Tracking · Collaboration</p>
+      <p><strong>Skills:</strong> Creative Analytics · Design Strategy · Engagement Tracking · Collaboration</p>
       <ul class="skills-bullets">
         <li>Designed 50+ digital assets (posters, newsletters, social media campaigns) and used engagement metrics to iterate designs.</li>
         <li>Increased student participation in coding events and hackathons by 35% through targeted visual communication.</li>
@@ -862,7 +867,7 @@
     <div class="story">
       <h3 class="story-title">Volunteer Coordinator</h3>
       <p>Drishti NGO · Jan 2020 – Dec 2022 · Ranchi, India</p>
-      <p>Skills: Outreach Analytics · Social Media Strategy · Data-Driven Coordination</p>
+      <p><strong>Skills:</strong> Outreach Analytics · Social Media Strategy · Data-Driven Coordination</p>
       <ul class="skills-bullets">
         <li>Organized 15+ community campaigns, reaching 500+ beneficiaries, while tracking participation to refine outreach models.</li>
         <li>Managed 20+ volunteers with structured task allocation and data-backed scheduling to maximize efficiency.</li>
@@ -876,7 +881,7 @@
     <div class="story">
       <h3 class="story-title">General Secretary</h3>
       <p>Abhivyakti Drama Club, BITD · Jan 2021 – Dec 2023 · Ranchi, India</p>
-      <p>Skills: Event Management · Team Leadership · Performance Analytics</p>
+      <p><strong>Skills:</strong> Event Management · Team Leadership · Performance Analytics</p>
       <ul class="skills-bullets">
         <li>Directed 10+ street plays and performances on social issues, reaching audiences of 1000+ students, measured via attendance and feedback surveys.</li>
         <li>Led a core team of 30+ members, implementing structured rehearsal schedules and data-tracked performance evaluations.</li>
@@ -890,7 +895,7 @@
     <div class="story">
       <h3 class="story-title">Graphics Lead</h3>
       <p>OWASP Ranchi · Jul 2022 – Dec 2023 · Ranchi, India</p>
-      <p>Skills: Design Analytics · Awareness Campaigns · Cybersecurity Engagement</p>
+      <p><strong>Skills:</strong> Design Analytics · Awareness Campaigns · Cybersecurity Engagement</p>
       <ul class="skills-bullets">
         <li>Created 25+ visuals (posters, newsletters, banners) for cybersecurity awareness campaigns, with digital reach growing by 30%.</li>
         <li>Supported the promotion of workshops attended by 200+ participants, monitoring attendance and feedback for continuous improvement.</li>
@@ -899,7 +904,7 @@
     </div>
   </template>
 
-  <!-- ===== MODAL (shared, scrollable) ===== -->
+  <!-- ===== MODAL (shared) ===== -->
   <div class="project-modal" id="projectModal" aria-hidden="true">
     <div class="project-modal__backdrop" data-close></div>
     <div class="project-modal__dialog" role="dialog" aria-modal="true">
@@ -933,12 +938,17 @@
       allNavLinks.forEach(a => a.classList.toggle('active', a.getAttribute('data-target') === id));
       history.replaceState(null, "", "#"+id);
       window.scrollTo({top: 0, behavior: "instant"});
+      // close mobile drawer if open
+      const mnav = document.getElementById('mnav');
+      if (mnav && mnav.checked) mnav.checked = false;
+      const hb = document.querySelector('.hamburger');
+      if (hb) hb.setAttribute('aria-expanded','false');
     }
     allNavLinks.forEach(a => a.addEventListener('click', (e)=>{ e.preventDefault(); showSection(a.getAttribute('data-target')); }));
     const initial = location.hash ? location.hash.replace("#","") : "home";
     showSection(initial);
 
-    /* Modal (Projects + Experience use same mechanism) */
+    /* Modal */
     const modal = document.getElementById('projectModal');
     const content = document.getElementById('projectContent');
     function openFromTemplate(tplId){
@@ -981,6 +991,16 @@
     toggleBtn.addEventListener('click', ()=>{
       applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     });
+
+    /* Mobile hamburger aria state */
+    const hb = document.querySelector('.hamburger');
+    const mnav = document.getElementById('mnav');
+    if (hb && mnav){
+      hb.addEventListener('click', ()=> {
+        const expanded = hb.getAttribute('aria-expanded') === 'true';
+        hb.setAttribute('aria-expanded', String(!expanded));
+      });
+    }
   </script>
 </body>
 </html>
